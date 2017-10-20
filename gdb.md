@@ -50,7 +50,7 @@ This command can be used to see the contents of all the registers.
 
 ### ```x/x <memory location>```
 
-This command is used to display the contents (quad word) of specific memory location. The content is displayed in hexadecimal. The memory location can be provided in different ways. Keep in mind it is always possible to use ```+``` or ```-``` to add to or subtract from the memory location. This is especially handy if you want to inspect arrays.
+This command is used to display the contents (double word) of specific memory location. The content is displayed in hexadecimal. The memory location can be provided in different ways. Keep in mind it is always possible to use ```+``` or ```-``` to add to or subtract from the memory location. This is especially handy if you want to inspect arrays.
 
 #### Direct
 

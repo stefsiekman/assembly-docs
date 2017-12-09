@@ -250,7 +250,7 @@ The request for the details fo a single user might go to
 `api.cashstream.io/users/667`. This would then return the exact same response as
 the `POST` request received.
 
-### Update: changing the name of a user
+#### Update: changing the name of a user
 
 Of course data should be changeable. This can be done with the HTTP `PUT`
 method. The request will look very similar to the `POST` request, only now to a
@@ -258,9 +258,70 @@ different URL. The request to update user #512 will go to
 `api.cashstream.io/users/512`, but the body of the request will remain the same,
 as will the response.
 
-### Delete: removing a user
+#### Delete: removing a user
 
 Removing a user from the database can be done using HTTP's `DELETE` method. The
 request for deletion doesn't require a body. It does have to point to a specific
 resource. You wouldn't want to delete all the users at once of course. The
 response is often without body.
+
+## Code examples
+
+Of course, this sounds all great if theory, but how can you make it work. In
+this section, I will give some code examples that will show you various
+important parts of any web application.
+
+### Creating the HTTP requests
+
+The often-discussed HTTP requests and responses can be made with a specific
+application for testing purposes, but this won't work in the actual client. Here
+the requests will be made using Ajax, which comes bundled with jQuery. If and
+when you have both of these installed, a POST request to add a new user might
+look like this.
+
+```js
+$.ajax({
+    method: "POST",
+    url: "https://api.cashstream.io/users",
+    data: {
+        name: "Sherlock",
+        mail: "sherlock@thescienceofdeduction.com",
+        birthdate: "11-03-1982",
+        registration_date: "10-11-2017"
+    },
+    contentType: "application/json",
+    success: (data) => {
+        // ... do something on success
+    },
+    error: () => {
+        // ... do something in case of an error
+    }
+})
+```
+
+Make sure to look at the lastest documentation of Ajax in jQuery if you want to
+have the best working example.
+
+### Handling HTTP requests
+
+The handling of the HTTP requests is done on the node.js server. Please read up
+on express if you want to see how to handle requests for certain resources with
+certain methods.
+
+### Hosting static files on the node.js server
+
+It is possible to host you static application files on the same server that runs
+your API. This can be done by using express' static middleware. A quick google
+search should give you plenty of information of how to implement this.
+
+## Where to go next
+
+This guide is only intended as a brief, mind you, very brief, summary of how
+web applications work. If you want to master this field, be sure to practise and
+research each of the covered topics. I'm sure you'll find plenty of stuff that
+isn't covered here.
+
+If you have any questions regarding this guide or web technologies in general,
+feel free to shoot me an e-mail at s.a.p.siekman@student.tudelft.nl.
+
+Happy coding!

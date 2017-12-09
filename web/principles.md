@@ -140,3 +140,101 @@ this resource was `api.cashstream.io/users/425`.)
     "registration_date": "04-05-2017"
 }
 ```
+
+JSON also works very well with array of data. The list of expenses made by our
+user Chris is also very well displayable in JSON. As you can imagine, the path
+to this data would be `api.cashstream.io/user/425/expenses`. The data might look
+something like this.
+
+```json
+[
+    {
+        "amount": 4.49,
+        "currency": "EUR",
+        "description": "Coffee at Starbucks",
+        "timestamp": "08-07-2017 18:37:52"
+    },
+    {
+        "amount": 10.00,
+        "currency": "EUR",
+        "description": "OV card top-up",
+        "timestamp": "08-07-2017 20:14:04"
+    },
+    {
+        "amount": 9.99,
+        "currency": "EUR",
+        "description": "Movie Ticker",
+        "timestamp": "08-07-2017 21:37:24"
+    }
+]
+```
+
+### Protocol for exchanging
+
+Since we're using a lot of web technologies, it makes sense to continue that
+trend when deciding on the best way of exchanging data between the client and
+the server (i.e. API). The HTTP protocol offers a wide range of data
+(manipulation) methods.
+
+The HTTP protocol is already used by the browser to get all the static files
+from the server. This is all done by HTTP's `GET` method: the method used for
+retrieving data from a URL. There are however a lot more options that HTTP
+offers, the most important for us are:
+
+- `POST` for adding data to the API;
+- `PUT` for updating specific data;
+- `DELETE` for removing data.
+
+### Examples
+
+It might help to see some examples of what these exchanges between a client and
+server might look like in practice. I will give examples for all of the options
+listed above. These operations are often referred to as _CRUD_ operations (i.e.
+Create, Read, Update, Delete)
+
+#### Create: adding a new user
+
+To conform to REST API standards, new data is added to a 'folder'. With folder
+I mean that is what the URL looks like. Okay, well, better just show what that
+looks like. When adding new data, you add this to the same place as where you
+list all the data. So, a `POST` request to add a user would be for to
+`api.cashstream.io/users`.
+
+Along with the `POST` request data will have to be sent. As discussed earlier,
+this is done in the form of JSON. Hence a raw HTTP `POST` request to add a new
+user will look something like this.
+
+```HTTP
+POST /users
+# various HTTP headers
+Content-Type: application/json
+
+
+{
+    "name": "Sherlock",
+    "mail": "sherlock@thescienceofdeduction.com",
+    "birthdate": "11-03-1982",
+    "registration_date": "10-11-2017"
+}
+```
+
+In response, the server will often send back a 200 (OK) status code and the
+same data that was added to the server. Server-generated data will be added to
+the response data too. For example, you could imagine the server returning the
+ID assigned to the user along too. This would for example be a plausible
+response.
+
+```HTTP
+200 OK
+# various HTTP headers
+Content-Type: application/json
+
+
+{
+    "id": 667,
+    "name": "Sherlock",
+    "mail": "sherlock@thescienceofdeduction.com",
+    "birthdate": "11-03-1982",
+    "registration_date": "10-11-2017"
+}
+```

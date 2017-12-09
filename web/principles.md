@@ -120,4 +120,23 @@ a resource will always produce the same result.
 
 ## Exchanging data: HTTP
 
-_To be written_
+In this section, I will go over how data is exchanged between the client (i.e.
+JavaScript running in the browser) and the server (i.e. node.js script).
+
+### A common format
+
+Of course, it would be neat if we decide on a data format that is easy to use
+for both the browser as well as the server. For most web applications and APIs
+the choice for this is JSON. The main reason for this is that JSON works very
+well with JavaScript objects. Basically they _are_ JS objects, but then all on
+it's own. The details of user #425 might look like this. (Remember the path to
+this resource was `api.cashstream.io/users/425`.)
+
+```json
+{
+    "name": "Chris",
+    "mail": "chris.stevenson@gmail.com",
+    "birthdate": "21-05-1976",
+    "registration_date": "04-05-2017"
+}
+```

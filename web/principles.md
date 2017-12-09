@@ -238,3 +238,29 @@ Content-Type: application/json
     "registration_date": "10-11-2017"
 }
 ```
+
+#### Read: listing all or a specific user
+
+I won't continue writing out the entire requests and responses, I will continue
+by pointing out the differences. A request for all users might go to the URL
+`api.cashstream.io/users` as pointed out earlier. This resource will just
+respond with a list of users, like the response for the `POST` request.
+
+The request for the details fo a single user might go to
+`api.cashstream.io/users/667`. This would then return the exact same response as
+the `POST` request received.
+
+### Update: changing the name of a user
+
+Of course data should be changeable. This can be done with the HTTP `PUT`
+method. The request will look very similar to the `POST` request, only now to a
+different URL. The request to update user #512 will go to
+`api.cashstream.io/users/512`, but the body of the request will remain the same,
+as will the response.
+
+### Delete: removing a user
+
+Removing a user from the database can be done using HTTP's `DELETE` method. The
+request for deletion doesn't require a body. It does have to point to a specific
+resource. You wouldn't want to delete all the users at once of course. The
+response is often without body.
